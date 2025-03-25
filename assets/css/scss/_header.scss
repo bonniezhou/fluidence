@@ -12,7 +12,7 @@
 .logo {
 	@include font-size(4.2);
 	color: var(--col-black);
-	font-family: var(--font-header);
+	font-family: 'Fluidence', sans-serif;
 	width: fit-content;
 	text-align: center;
 	line-height: 1.1;
