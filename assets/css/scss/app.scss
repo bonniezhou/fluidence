@@ -12,13 +12,12 @@ Author URI: https://bonniezhou.com
 
 // Import base styles
 @import "_site";
-
-// Import components
 @import "_typography";
 @import "_images";
 
-// Import layout styles
+// Import component styles
 @import "_header";
+@import "_typetester";
 @import "_footer";
 
 // Import page styles

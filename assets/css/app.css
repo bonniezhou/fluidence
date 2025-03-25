@@ -6,7 +6,7 @@ Author URI: https://bonniezhou.com
 */
 @font-face {
   font-family: "Fluidence";
-  src: url("../specimens/fluidence/Fluidence-VF.woff2") format("woff2-variations");
+  src: url("../fonts/Fluidence-VF.woff2") format("woff2-variations");
   font-weight: 400 900;
 }
 @font-face {
@@ -208,45 +208,6 @@ svg {
   border-bottom: 1px solid var(--col-black);
 }
 
-/*
- * Footer
- * ----------------------------------------------------------- */
-.layout--footer {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-row-gap: 2rem;
-  padding: 3rem 4rem;
-  background-color: var(--col-black);
-  color: var(--col-white);
-}
-
-.layout--footer > * {
-  font-size: 16px;
-  font-size: 1.6rem;
-}
-
-@media screen and (min-width: 64em) {
-  .layout--footer {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .layout--footer p {
-    text-align: center;
-  }
-}
-.project {
-  padding: 2rem;
-}
-
-.type-title {
-  padding: 3rem;
-}
-.type-title h1 {
-  margin-bottom: 0.5rem;
-  font-size: 140px;
-  font-size: 14rem;
-  font-weight: 400;
-}
-
 .type-tester {
   margin: 3rem auto;
   padding: 3rem;
@@ -304,6 +265,45 @@ svg {
 }
 .type-tester .type-demo:focus {
   outline: none;
+}
+
+/*
+ * Footer
+ * ----------------------------------------------------------- */
+.layout--footer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 2rem;
+  padding: 3rem 4rem;
+  background-color: var(--col-black);
+  color: var(--col-white);
+}
+
+.layout--footer > * {
+  font-size: 16px;
+  font-size: 1.6rem;
+}
+
+@media screen and (min-width: 64em) {
+  .layout--footer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .layout--footer p {
+    text-align: center;
+  }
+}
+.project {
+  padding: 2rem;
+}
+
+.type-title {
+  padding: 3rem;
+}
+.type-title h1 {
+  margin-bottom: 0.5rem;
+  font-size: 140px;
+  font-size: 14rem;
+  font-weight: 400;
 }
 
 .type-about {
