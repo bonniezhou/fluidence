@@ -33,10 +33,12 @@ class FluidenceTypeTester extends HTMLElement {
     render() {
         this.shadowRoot.innerHTML = `
             <style>
+                :host {
+                    grid-column: 1 / 7;
+                }
+
                 .type-tester {
-                    margin: 3rem auto;
-                    padding: 3rem;
-                    min-height: 250px;
+                    padding: 2rem 0 6rem;
                 }
 
                 .controls {
