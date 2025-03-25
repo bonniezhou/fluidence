@@ -42,42 +42,18 @@
             <h1 class="typefaceName">Fluidence</h1>
         </section>
 
-        <div class="type-tester" aria-label="Type Tester">
-            <div class="controls">
-                <div class="control-group">
-                    <select class="style-select" id="fontStyleSelect">
-                        <option value="regular">Fluidence Regular</option>
-                        <option value="bold">Fluidence Bold</option>
-                        <option value="black">Fluidence Black</option>
-                    </select>
-                </div>
+        <fluidence-type-tester 
+            default-text="Dance is the hidden language of the soul." 
+            default-size="60">
+        </fluidence-type-tester>
 
-                <div class="control-group slider">
-                    <label>Weight</label>
-                    <input type="range" id="fontWeightSlider" min="400" max="900" value="400">
-                    <label><span id="fontWeightValue">400</span></label>
-                </div>
-
-                <div class="control-group slider">
-                    <label>Size</label>
-                    <input type="range" id="fontSizeSlider" min="20" max="300" value="100">
-                    <label><span id="fontSizeValue">16</span>px</label>
-                </div>
-
-                <div class="control-group align-buttons">
-                    <button data-align="left" class="active">Left</button>
-                    <button data-align="center">Center</button>
-                    <button data-align="right">Right</button>
-                </div>
-            </div>
-            
-            <div class="type-demo" 
-                role="textbox"
-                id="textPreview"
-                contenteditable="true">
-                Dance is the hidden language of the soul.
-            </div>
-        </div>
+        <fluidence-type-tester 
+            default-text="Fais de ta vie un rêve, et d’un rêve une réalité." 
+            default-weight="700" 
+            default-size="100" 
+            default-align="right"
+            default-style="bold">
+        </fluidence-type-tester>
 
         <section class="type-about" aria-label="Typeface Information">
             <div class="about-typeface">
@@ -90,70 +66,7 @@
     <footer id="footerContent" class="layout--footer" aria-label="Footer">
     </footer>
 
-    <script>
-        // Get all elements
-        const textPreview = document.getElementById('textPreview');
-        const fontStyleSelect = document.getElementById('fontStyleSelect');
-        const fontWeightSlider = document.getElementById('fontWeightSlider');
-        const fontWeightValue = document.getElementById('fontWeightValue');
-        const fontSizeSlider = document.getElementById('fontSizeSlider');
-        const fontSizeValue = document.getElementById('fontSizeValue');
-        const alignButtons = document.querySelectorAll('.align-buttons button');
-
-        function updateFromSlider() {
-            textPreview.style.fontSize = `${fontSizeSlider.value}px`;
-            textPreview.style.fontVariationSettings = `'wght' ${fontWeightSlider.value}`;
-        }
-
-        function updateFromSelect() {
-            if (fontStyleSelect.value === 'regular') {
-                textPreview.style.fontVariationSettings = `'wght' 400`;
-                fontWeightSlider.value = 400;
-                fontWeightValue.textContent = fontWeightSlider.value;
-            } else if (fontStyleSelect.value === 'bold') {
-                textPreview.style.fontVariationSettings = `'wght' 700`;
-                fontWeightSlider.value = 700;
-                fontWeightValue.textContent = fontWeightSlider.value;
-            } else if (fontStyleSelect.value === 'black') {
-                textPreview.style.fontVariationSettings = `'wght' 900`;
-                fontWeightSlider.value = 900;
-                fontWeightValue.textContent = fontWeightSlider.value;
-            }
-        }
-
-        // Update label values
-        function updateLabelValues() {
-            fontSizeValue.textContent = fontSizeSlider.value;
-            fontWeightValue.textContent = fontWeightSlider.value;
-        }
-
-        // Event listeners for sliders
-        fontSizeSlider.addEventListener('input', () => {
-            updateFromSlider();
-            updateLabelValues();
-        });
-
-        fontWeightSlider.addEventListener('input', () => {
-            updateFromSlider();
-            updateLabelValues();
-        });
-
-        fontStyleSelect.addEventListener('change', updateFromSelect);
-
-        // Text alignment buttons
-        alignButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                alignButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                textPreview.style.textAlign = button.dataset.align;
-            });
-        });
-
-        // Initial setup
-        updateFromSlider();
-        updateFromSelect();
-        updateLabelValues();
-    </script>
+    <script type="module" src="../../assets/js/type-tester.js"></script>
 </body>
 
 </html>
