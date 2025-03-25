@@ -33,10 +33,6 @@ class FluidenceTypeTester extends HTMLElement {
     render() {
         this.shadowRoot.innerHTML = `
             <style>
-                :host {
-                    font-family: 'Red Hat Text';
-                }
-
                 .type-tester {
                     margin: 3rem auto;
                     padding: 3rem;
@@ -55,7 +51,7 @@ class FluidenceTypeTester extends HTMLElement {
                 .control-group button,
                 .control-group select {
                     font-size: 16px;
-                    font-family: 'Red Hat Text';
+                    font-family: var(--font-body);
                     display: flex;
                     gap: 8px;
                     padding-right: 1em;
@@ -64,12 +60,17 @@ class FluidenceTypeTester extends HTMLElement {
                 }
 
                 .style-select {
-                    font-size: 16px;
                     padding: .5em;
-                    border: 1px solid var(--col-white);
+                    background: var(--col-light-red);
+                    border: 1px solid var(--col-light-red);
 
                     &:hover {
                         border: 1px solid var(--col-red);
+                    }
+
+                    select {
+                        border: none;
+                        background: var(--col-light-red);
                     }
                 }
                 
@@ -84,7 +85,8 @@ class FluidenceTypeTester extends HTMLElement {
 
                     button {
                         padding: 10px;
-                        border: 1px solid var(--col-white);
+                        background: var(--col-light-red);
+                        border: 1px solid var(--col-light-red);
 
                         &:hover {
                             border: 1px solid var(--col-red);
@@ -99,7 +101,7 @@ class FluidenceTypeTester extends HTMLElement {
                 }
 
                 .type-demo {
-                    font-family: 'Fluidence', sans-serif;
+                    font-family: 'Fluidence';
                     line-height: normal;
 
                     &:focus {
@@ -110,11 +112,11 @@ class FluidenceTypeTester extends HTMLElement {
 
             <div class="type-tester" aria-label="Type Tester">
                 <div class="controls">
-                    <div class="control-group">
-                        <select class="style-select" id="fontStyleSelect" selected="${this.defaultStyle || "regular"}">
-                            <option value="regular">Fluidence Regular</option>
-                            <option value="bold">Fluidence Bold</option>
-                            <option value="black">Fluidence Black</option>
+                    <div class="control-group style-select">
+                        <select id="fontStyleSelect" selected="${this.defaultStyle || "regular"}">
+                            <option value="regular" ${this.defaultStyle === 'regular' ? 'selected' : ''}>Fluidence Regular</option>
+                            <option value="bold" ${this.defaultStyle === 'bold' ? 'selected' : ''}>Fluidence Bold</option>
+                            <option value="black" ${this.defaultStyle === 'black' ? 'selected' : ''}>Fluidence Black</option>
                         </select>
                     </div>
 
@@ -186,6 +188,19 @@ class FluidenceTypeTester extends HTMLElement {
             const weight = this.fontWeightSlider.value;
             this.textPreview.style.fontVariationSettings = `'wght' ${weight}`;
             this.fontWeightValue.textContent = weight;
+
+            const options = this.fontStyleSelect.options;
+            switch (true) {
+                case weight >= 800:
+                    if (!options[2].selected) options[2].selected = true;
+                    break;
+                case weight >= 600:
+                    if (!options[1].selected) options[1].selected = true;
+                    break;
+                default:
+                    if (!options[0].selected) options[0].selected = true;
+                    break;
+            }
         });
 
         // Style select listener
