@@ -153,15 +153,21 @@ svg {
 }
 
 .layout--header {
-  padding: 2em 3em;
+  padding: 1.5em 3em;
   display: grid;
   grid-template-columns: 1fr 2fr;
   align-items: center;
-  border-bottom: 1px solid var(--col-red);
+  border-bottom: 2px solid var(--col-red);
 }
 
 .logo {
-  width: 300px;
+  font-size: 42px;
+  font-size: 4.2rem;
+  color: var(--col-black);
+  font-family: var(--font-header);
+  width: fit-content;
+  text-align: center;
+  line-height: 1.1;
 }
 
 .navigation {
@@ -170,13 +176,11 @@ svg {
   padding: 0;
   text-align: right;
 }
-
 .navigation li {
   display: inline;
   margin: 0 1em;
   min-height: 48px;
 }
-
 .navigation li a {
   color: var(--col-black);
   padding-bottom: 0.1em;
@@ -186,7 +190,6 @@ svg {
   padding-bottom: 0.1em;
   border-bottom: 1px solid var(--col-black);
 }
-
 .navigation li.current a {
   color: var(--col-red);
   font-weight: bold;
@@ -198,16 +201,11 @@ svg {
   padding-bottom: 0.1em;
   border-bottom: 2px solid var(--col-red);
 }
-
 .navigation li.inactive a {
   color: var(--col-red);
   font-weight: bold;
   padding-bottom: 0.1em;
   border-bottom: 1px solid var(--col-black);
-}
-
-.about-student .module--social svg {
-  fill: var(--col-black);
 }
 
 /*
@@ -235,18 +233,15 @@ svg {
     text-align: center;
   }
 }
-.typeface--info {
+.type-title {
   margin: 3rem auto;
   padding: 3rem;
 }
-
-.type-intro h1 {
+.type-title h1 {
   margin-bottom: 0.5rem;
-}
-.type-intro p {
-  color: var(--col-black);
-  font-size: 16px;
-  font-size: 1.6rem;
+  font-size: 140px;
+  font-size: 14rem;
+  font-weight: 400;
 }
 
 .type-tester {
@@ -282,16 +277,6 @@ svg {
   .about-student {
     grid-column: 8/-1;
   }
-}
-figure {
-  position: relative;
-}
-
-figure img {
-  position: relative;
-  z-index: 99;
-  margin: 0;
-  width: 100% !important;
 }
 
 /*# sourceMappingURL=app.css.map */
