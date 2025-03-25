@@ -1,0 +1,21 @@
+/* Images & media elements
+ * ------------------------------------------------------------- */
+
+img {
+	max-width: 100%; /* Adhere to container width. */
+	height: auto; /* Make sure images are scaled correctly. */
+	display: block;
+}
+
+svg {
+	width: 24px;
+	height: 24px;
+
+    display: inline-block;
+	vertical-align: middle;
+    
+    margin-top: -0.3em;
+}
+
+.about-student .module--social svg { fill: var(--col-black); }
+

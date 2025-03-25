@@ -1,0 +1,297 @@
+/*
+Fluidence Landing Page
+
+Author: Bonnie Zhou
+Author URI: https://bonniezhou.com
+*/
+@font-face {
+  font-family: "Fluidence";
+  src: url("../specimens/fluidence/Fluidence-VF.woff") format("woff");
+}
+@font-face {
+  font-family: "Jasmine de Lune";
+  src: url(../fonts/JasminedeLune-Regular.woff) format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+:root {
+  --font-header: "Fluidence", sans-serif;
+  --font-body: "Jasmine de Lune", serif;
+  --col-black: #161616;
+  --col-white: #ffffff;
+  --col-light-red: #f9f1f1;
+  --col-red: #ec121b;
+}
+
+/* Reset
+ * ------------------------------------------------------------- */
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+article, aside, details, figcaption, figure, footer,
+header, hgroup, menu, nav, section {
+  display: block;
+}
+
+button, fieldset, input, textarea, select, fieldset {
+  background: none;
+  border: none;
+  border-radius: 0;
+  outline: 0;
+  -webkit-appearance: none;
+}
+
+/* Accessibility
+ * ------------------------------------------------------------- */
+.screen-reader-text {
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+}
+
+/* Site settings
+ * ------------------------------------------------------------- */
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgba(var(--col-black), 1);
+  overflow-x: hidden;
+  position: relative;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+/* Headings and paragraphs
+ * ------------------------------------------------------------- */
+h1 {
+  font-family: var(--font-header);
+  font-size: 48px;
+  font-size: 4.8rem;
+  line-height: 1;
+  color: var(--col-red);
+  margin-bottom: 1em;
+}
+
+h2 {
+  font-size: 24px;
+  font-size: 2.4rem;
+  color: var(--col-red);
+  margin-bottom: 1em;
+}
+
+h3 {
+  font-size: 18px;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+p {
+  margin-bottom: 0.75em;
+}
+
+/* Links 
+ * ------------------------------------------------------------- */
+a {
+  color: var(--col-red);
+  text-decoration: none;
+}
+
+/* Other
+ * ------------------------------------------------------------- */
+hr {
+  border: 1px solid rgba(var(--col-black), 1);
+  margin: 3em 0;
+}
+
+/* Overrides
+ * ------------------------------------------------------------- */
+.fsjs-skin .dk-selected,
+.fsjs-skin .fsjs-button,
+.fsjs-skin .fsjs-block-type-buttongroup button,
+.fsjs-label-unit {
+  font-size: 16px !important;
+  font-size: 1.6rem !important;
+}
+
+.fsjs-block-type-textfield .fsjs-element {
+  padding: 6rem 0;
+}
+
+/* Images & media elements
+ * ------------------------------------------------------------- */
+img {
+  max-width: 100%; /* Adhere to container width. */
+  height: auto; /* Make sure images are scaled correctly. */
+  display: block;
+}
+
+svg {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: -0.3em;
+}
+
+.about-student .module--social svg {
+  fill: var(--col-black);
+}
+
+.layout--header {
+  padding: 2em 3em;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+  border-bottom: 1px solid var(--col-red);
+}
+
+.logo {
+  width: 300px;
+}
+
+.navigation {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+}
+
+.navigation li {
+  display: inline;
+  margin: 0 1em;
+  min-height: 48px;
+}
+
+.navigation li a {
+  color: var(--col-black);
+  padding-bottom: 0.1em;
+}
+.navigation li a:hover {
+  color: var(--col-black);
+  padding-bottom: 0.1em;
+  border-bottom: 1px solid var(--col-black);
+}
+
+.navigation li.current a {
+  color: var(--col-red);
+  font-weight: bold;
+  padding-bottom: 0.1em;
+  border-bottom: 2px solid var(--col-red);
+}
+.navigation li.current a:hover {
+  color: var(--col-red);
+  padding-bottom: 0.1em;
+  border-bottom: 2px solid var(--col-red);
+}
+
+.navigation li.inactive a {
+  color: var(--col-red);
+  font-weight: bold;
+  padding-bottom: 0.1em;
+  border-bottom: 1px solid var(--col-black);
+}
+
+.about-student .module--social svg {
+  fill: var(--col-black);
+}
+
+/*
+ * Footer
+ * ----------------------------------------------------------- */
+.layout--footer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 2rem;
+  padding: 3rem 4rem;
+  background-color: var(--col-black);
+  color: var(--col-white);
+}
+
+.layout--footer > * {
+  font-size: 16px;
+  font-size: 1.6rem;
+}
+
+@media screen and (min-width: 64em) {
+  .layout--footer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .layout--footer p {
+    text-align: center;
+  }
+}
+.typeface--info {
+  margin: 3rem auto;
+  padding: 3rem;
+}
+
+.type-intro h1 {
+  margin-bottom: 0.5rem;
+}
+.type-intro p {
+  color: var(--col-black);
+  font-size: 16px;
+  font-size: 1.6rem;
+}
+
+.type-tester {
+  margin: 3.5rem 0;
+}
+
+.type-about {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-top: 1px solid var(--col-black);
+  padding-top: 4em;
+}
+.type-about > * {
+  margin-bottom: 3em;
+}
+.type-about .about-typeface p {
+  font-size: 24px;
+  font-size: 2.4rem;
+}
+.type-about .about-student h3 {
+  font-size: 16px;
+  font-size: 1.6rem;
+  color: var(--col-red);
+}
+
+@media screen and (min-width: 64em) {
+  .type-about {
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .about-typeface {
+    grid-column: 1/7;
+  }
+  .about-student {
+    grid-column: 8/-1;
+  }
+}
+figure {
+  position: relative;
+}
+
+figure img {
+  position: relative;
+  z-index: 99;
+  margin: 0;
+  width: 100% !important;
+}
+
+/*# sourceMappingURL=app.css.map */

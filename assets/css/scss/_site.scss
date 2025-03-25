@@ -1,0 +1,51 @@
+/* Reset
+ * ------------------------------------------------------------- */
+* { 
+	-moz-box-sizing: border-box; 
+	-webkit-box-sizing: border-box; 
+	box-sizing: border-box; 
+	-webkit-text-size-adjust: 100%; 
+	
+	margin: 0;
+	padding: 0;
+}
+
+article, aside, details, figcaption, figure, footer, 
+header, hgroup, menu, nav, section { display: block; }
+
+button, fieldset, input, textarea, select, fieldset {
+	background: none;
+	border: none;
+	border-radius: 0;
+	outline: 0;
+	-webkit-appearance: none;
+}
+
+
+/* Accessibility
+ * ------------------------------------------------------------- */
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	overflow: hidden;
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+}
+
+
+/* Site settings
+ * ------------------------------------------------------------- */
+
+html { font-size: 62.5%; }
+
+body {
+	font-family: var(--font-body);
+	@include font-size(1.8);
+	font-weight: 400;
+	line-height: 1.5;
+	color: rgba(var(--col-black), 1);
+	overflow-x: hidden;
+	position: relative;
+	max-width: 1920px;
+	margin: 0 auto;
+}

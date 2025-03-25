@@ -1,0 +1,23 @@
+/*
+ * Footer
+ * ----------------------------------------------------------- */
+
+.layout--footer {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-row-gap: 2rem;
+	
+	padding: 3rem 4rem;
+	background-color: var(--col-black);
+	color: var(--col-white);
+}
+
+.layout--footer > * { @include font-size(1.6); }
+
+@media screen and ( min-width: 64em ) {
+	
+	.layout--footer { grid-template-columns: repeat(3, 1fr); }	
+	.layout--footer p { text-align: center; }
+}
+
+

@@ -1,0 +1,61 @@
+// Header 
+// -----------------------------------------------------------
+
+.layout--header {
+	padding: 2em 3em;
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	align-items: center;
+	border-bottom: 1px solid var(--col-red);
+  }
+
+  .logo {
+	width: 300px;
+  }
+  
+  .navigation {
+	@include no-bullets();
+	text-align: right;
+  }
+  
+  .navigation li {
+	display: inline;
+	margin: 0 1em;
+	min-height: 48px;
+  }
+  
+  .navigation li a {
+	color: var(--col-black);
+	padding-bottom: 0.1em;
+	// @include link-effect();
+  
+	&:hover {
+	  color: var(--col-black);
+	  padding-bottom: 0.1em;
+	  border-bottom: 1px solid var(--col-black);
+	}
+  }
+  
+  .navigation li.current a {
+	color: var(--col-red);
+	font-weight: bold;
+	padding-bottom: 0.1em;
+	border-bottom: 2px solid var(--col-red);
+
+	&:hover {
+		color: var(--col-red);
+		padding-bottom: 0.1em;
+		border-bottom: 2px solid var(--col-red);
+	}
+  }
+  
+  .navigation li.inactive a {
+	color: var(--col-red);
+	font-weight: bold;
+	padding-bottom: 0.1em;
+	border-bottom: 1px solid var(--col-black);
+  }
+
+  .about-student .module--social svg {
+	fill: var(--col-black);
+  }
