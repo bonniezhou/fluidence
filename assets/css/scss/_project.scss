@@ -28,8 +28,11 @@
 		padding: 1em 0;
 	}
 
-	.control-group {
+	.control-group,
+	.control-group button,
+	.control-group select {
 		@include font-size(1.6);
+		font-family: var(--font-body);
 		display: flex;
 		gap: 8px;
 		padding-right: 1em;
@@ -37,7 +40,6 @@
 
 	.style-select {
 		@include font-size(1.6);
-		font-family: var(--font-body);
 		padding: .5em;
 		border: 1px solid var(--col-white);
 

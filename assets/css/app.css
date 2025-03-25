@@ -17,7 +17,7 @@ Author URI: https://bonniezhou.com
 }
 :root {
   --font-header: "Fluidence", sans-serif;
-  --font-body: "Jasmine de Lune", serif;
+  --font-body: "Red Hat Text", serif;
   --col-black: #161616;
   --col-white: #ffffff;
   --col-light-red: #f9f1f1;
@@ -259,9 +259,12 @@ svg {
   flex-wrap: wrap;
   padding: 1em 0;
 }
-.type-tester .control-group {
+.type-tester .control-group,
+.type-tester .control-group button,
+.type-tester .control-group select {
   font-size: 16px;
   font-size: 1.6rem;
+  font-family: var(--font-body);
   display: flex;
   gap: 8px;
   padding-right: 1em;
@@ -269,7 +272,6 @@ svg {
 .type-tester .style-select {
   font-size: 16px;
   font-size: 1.6rem;
-  font-family: var(--font-body);
   padding: 0.5em;
   border: 1px solid var(--col-white);
 }
