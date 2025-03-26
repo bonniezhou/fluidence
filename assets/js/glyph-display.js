@@ -26,94 +26,139 @@ class GlyphDisplay extends HTMLElement {
     this.shadowRoot.innerHTML = `
       <style>
         :host {
+          grid-column: 1 / -1;
           font-family: ${font}, sans-serif;
         }
+          
         .glyph-grid {
           display: grid;
           grid-template-columns: repeat(6, 1fr);
-          grid-auto-rows: minmax(100px, auto);
         }
+
         .inspector {
           grid-column: 1 / 4;
           display: flex;
           flex-direction: column;
-          padding: 20px;
+          padding: 2rem;
+          margin: .2rem 0;
           background-color: var(--col-light-red);
-        }
-        .toolbar {
+          aspect-ratio: 1/1;
           font-family: var(--font-body);
-          display: flex;
-          flex-direction: column;
+
+          .slider {
+            padding: 0 .5rem 2rem;
+            display: flex;
+            gap: 1rem;
+
+            .range-slider {
+              flex-grow: 1;
+              -webkit-appearance: none;
+              appearance: none;
+              border: none;
+              background: transparent;
+
+              &::-webkit-slider-runnable-track {
+                height: .1rem;
+                background: var(--col-red);
+              }
+              &::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                cursor: pointer;
+                border-radius: 50%;
+                margin-top: -0.75rem;
+                height: 1.5rem;
+                width: 1.5rem;
+                background: var(--col-red);
+              }
+
+              &::-moz-range-track {
+                height: .1rem;
+                background: var(--col-red);
+              }
+              &::-moz-range-thumb {
+                border: none;
+                cursor: pointer;
+                border-radius: 50%;
+                margin-top: -0.75rem;
+                height: 1.5rem;
+                width: 1.5rem;
+                background: var(--col-red);
+              }
+            }
+          }
+          .preview {
+            font-size: 40rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            font-family: ${font}, sans-serif;
+          }
+          .unicode {
+            text-align: center;
+            padding-top: 2rem;
+            color: #666;
+          }
         }
-        .preview {
-          font-size: 40rem;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-grow: 1;
-          background-color: white;
-        }
-        .identification {
-          text-align: center;
-          margin: 10px 0;
-        }
-        .unicode {
-          color: #666;
-        }
+
         .glyph-list {
           grid-column: 4 / -1;
-          background-color: #f9f9f9;
-          overflow-x: auto;
-          position: relative;
-        }
-        .glyph-list .content {
-          display: grid;
-          grid-template-columns: repeat(10, 1fr);
-          padding: 10px;
-        }
-        .glyph-list a {
-          text-decoration: none;
-          color: black;
-          text-align: center;
-          cursor: pointer;
-          aspect-ratio: 1 / 1;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-size: 4rem;
-          padding: 0;
-        }
-        .glyph-list a:hover,
-        .glyph-list a.selected {
-          background-color: #e0e0e0;
-        }
-        .slider {
-          display: flex;
-          flex-direction: column;
+
+          .content {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: .2rem;
+            padding: .2rem;
+          }
+
+          a {
+            text-decoration: none;
+            color: black;
+            text-align: center;
+            cursor: pointer;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4rem;
+            background: var(--col-light-red);
+
+            &:hover {
+              box-shadow: 0 0 0 .1rem var(--col-red);
+            }
+
+            &.selected {
+              background: var(--col-red);
+              color: var(--col-white);
+            }
+          }
         }
       </style>
       <div class="glyph-grid">
         <div class="inspector">
-          <div class="toolbar">
-            <div class="slider opsz-slider">
-              <input type="range" name="wght" value="32" min="14" max="32" step="0.1">
-              Weight
-            </div>
-            <div class="identification">
-              <div class="name" id="glyph-name">Select a Glyph</div>
-              <div class="unicode" id="glyph-unicode"></div>
-            </div>
+          <div class="slider">
+              <label>Weight</label>
+              <input class="range-slider"
+                  type="range" 
+                  id="fontWeightSlider" 
+                  min="400" 
+                  max="900" 
+                  value="${this.defaultWeight || 400}"
+              >
+              <label><span id="fontWeightValue">${this.defaultWeight || 400}</span></label>
           </div>
           <div class="preview" id="glyph-preview"></div>
+          <div class="unicode" id="glyph-unicode"></div>
         </div>
         <div class="glyph-list">
           <div class="content">
             ${characters.split('').map((char, index) => `
               <a href="#" 
-                 data-name="${char}" 
-                 data-cp="${char.charCodeAt(0).toString(16).toUpperCase().padStart(4, '0')}"
-                 title="${char}\nU+${char.charCodeAt(0).toString(16).toUpperCase().padStart(4, '0')}"
-                 ${index === 0 ? 'class="selected"' : ''}
+                data-name="${char}" 
+                data-cp="${char.charCodeAt(0).toString(16).toUpperCase().padStart(4, '0')}"
+                title="${char}\nU+${char.charCodeAt(0).toString(16).toUpperCase().padStart(4, '0')}"
+                ${index === 0 ? 'class="selected"' : ''}
               >${char}</a>
             `).join('')}
           </div>
@@ -149,11 +194,9 @@ class GlyphDisplay extends HTMLElement {
   }
 
   selectCharacter(char, unicode) {
-    const nameEl = this.shadowRoot.getElementById('glyph-name');
     const unicodeEl = this.shadowRoot.getElementById('glyph-unicode');
     const previewEl = this.shadowRoot.getElementById('glyph-preview');
 
-    nameEl.textContent = char;
     unicodeEl.textContent = `U+${unicode}`;
     previewEl.textContent = char;
   }
