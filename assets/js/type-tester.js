@@ -54,7 +54,6 @@ class FluidenceTypeTester extends HTMLElement {
                     font-family: var(--font-body);
                     display: flex;
                     gap: 1rem;
-                    transition: border .2s ease-in-out;
                 }
 
                 .control-group.select {
@@ -129,7 +128,6 @@ class FluidenceTypeTester extends HTMLElement {
                         background: var(--col-light-red);
                         border: .1rem solid var(--col-light-red);
                         cursor: pointer;
-                        transition: border .2s ease-in-out;
 
                         &:hover {
                             border: .1rem solid var(--col-red);

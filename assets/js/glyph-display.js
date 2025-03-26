@@ -75,7 +75,6 @@ class GlyphDisplay extends HTMLElement {
             font-family: var(--font-body);
             display: flex;
             gap: 8px;
-            transition: border .2s ease-in-out;
           }
 
           .control-group.select {
