@@ -53,11 +53,45 @@ class GlyphDisplay extends HTMLElement {
           background-color: var(--col-light-red);
           font-family: var(--font-body);
 
-          .slider {
-            padding: 0 .5rem 2rem;
+          .controls {
             display: flex;
-            gap: 1rem;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            padding: 1rem 0;
+          }
 
+          .control-group {
+            font-family: var(--font-body);
+            font-size: 1.6rem;
+            display: flex;
+            gap: 8px;
+            transition: border .2s ease-in-out;
+          }
+
+          .control-group.select {
+            padding: .5rem;
+            background: var(--col-light-red);
+            border: .1rem solid var(--col-light-red);
+
+            &:hover {
+              border: .1rem solid var(--col-red);
+            }
+
+            select {
+              font-family: var(--font-body);
+              font-size: 1.6rem;
+              border: none;
+              background: var(--col-light-red);
+              cursor: pointer;
+              padding-right: .5rem;
+              outline: 0;
+            }
+          }
+
+          .control-group.slider {
+            flex-grow: 1;
+          
             .range-slider {
               flex-grow: 1;
               -webkit-appearance: none;
@@ -95,6 +129,7 @@ class GlyphDisplay extends HTMLElement {
               }
             }
           }
+
           .preview {
             font-size: 40rem;
             display: flex;
@@ -103,6 +138,7 @@ class GlyphDisplay extends HTMLElement {
             background-color: white;
             font-family: ${font}, sans-serif;
           }
+
           .unicode {
             text-align: center;
             padding-top: 2rem;
@@ -146,16 +182,25 @@ class GlyphDisplay extends HTMLElement {
       <div class="glyph-grid">
         <div class="inspector-wrapper">
           <div class="inspector">
-            <div class="slider">
+            <div class="controls">
+              <div class="control-group select">
+                <select id="fontStyleSelect" selected="${this.defaultStyle || "regular"}">
+                  <option value="regular" ${this.defaultStyle === 'regular' ? 'selected' : ''}>Fluidence Regular</option>
+                  <option value="bold" ${this.defaultStyle === 'bold' ? 'selected' : ''}>Fluidence Bold</option>
+                  <option value="black" ${this.defaultStyle === 'black' ? 'selected' : ''}>Fluidence Black</option>
+                </select>
+              </div>
+              <div class="control-group slider">
                 <label>Weight</label>
                 <input class="range-slider"
-                    type="range" 
-                    id="fontWeightSlider" 
-                    min="400" 
-                    max="900" 
-                    value="${this.defaultWeight || 400}"
+                  type="range" 
+                  id="fontWeightSlider" 
+                  min="400" 
+                  max="900" 
+                  value="${this.defaultWeight || 400}"
                 >
                 <label><span id="fontWeightValue">${this.defaultWeight || 400}</span></label>
+              </div>
             </div>
             <div class="preview" id="glyph-preview"></div>
             <div class="unicode" id="glyph-unicode"></div>

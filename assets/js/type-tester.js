@@ -44,20 +44,16 @@ class FluidenceTypeTester extends HTMLElement {
                 .controls {
                     display: flex;
                     align-items: center;
-                    gap: 16px;
+                    gap: 2rem;
                     flex-wrap: wrap;
-                    padding: 1em 0;
+                    padding: 1rem 0;
                 }
 
-                .control-group,
-                .control-group button,
-                .control-group select {
+                .control-group {
                     font-size: 16px;
                     font-family: var(--font-body);
                     display: flex;
-                    gap: 8px;
-                    padding-right: 1em;
-	                outline: 0;
+                    gap: 1rem;
                     transition: border .2s ease-in-out;
                 }
 
@@ -71,9 +67,13 @@ class FluidenceTypeTester extends HTMLElement {
                     }
 
                     select {
+                        font-size: 1.6rem;
+                        font-family: var(--font-body);
                         border: none;
                         background: var(--col-light-red);
                         cursor: pointer;
+                        padding-right: .5rem;
+                        outline: 0;
                     }
                 }
 
@@ -123,6 +123,8 @@ class FluidenceTypeTester extends HTMLElement {
                     gap: 0;
 
                     button {
+                        font-size: 1.6rem;
+                        font-family: var(--font-body);
                         padding: 10px;
                         background: var(--col-light-red);
                         border: .1rem solid var(--col-light-red);
