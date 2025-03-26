@@ -34,7 +34,7 @@ class FluidenceTypeTester extends HTMLElement {
         this.shadowRoot.innerHTML = `
             <style>
                 :host {
-                    grid-column: 1 / 7;
+                    grid-column: 1 / -1;
                 }
 
                 .type-tester {
