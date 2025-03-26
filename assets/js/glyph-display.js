@@ -29,20 +29,28 @@ class GlyphDisplay extends HTMLElement {
           grid-column: 1 / -1;
           font-family: ${font}, sans-serif;
         }
-          
+
         .glyph-grid {
           display: grid;
           grid-template-columns: repeat(6, 1fr);
         }
 
-        .inspector {
+        .inspector-wrapper {
           grid-column: 1 / 4;
+        }
+
+        .inspector {
+          position: sticky;
+          top: 0;
+          height: 100vh;
+
           display: flex;
           flex-direction: column;
-          padding: 2rem;
+          justify-content: center;
+          padding: 0 2rem;
           margin: .2rem 0;
+
           background-color: var(--col-light-red);
-          aspect-ratio: 1/1;
           font-family: var(--font-body);
 
           .slider {
@@ -136,20 +144,22 @@ class GlyphDisplay extends HTMLElement {
         }
       </style>
       <div class="glyph-grid">
-        <div class="inspector">
-          <div class="slider">
-              <label>Weight</label>
-              <input class="range-slider"
-                  type="range" 
-                  id="fontWeightSlider" 
-                  min="400" 
-                  max="900" 
-                  value="${this.defaultWeight || 400}"
-              >
-              <label><span id="fontWeightValue">${this.defaultWeight || 400}</span></label>
+        <div class="inspector-wrapper">
+          <div class="inspector">
+            <div class="slider">
+                <label>Weight</label>
+                <input class="range-slider"
+                    type="range" 
+                    id="fontWeightSlider" 
+                    min="400" 
+                    max="900" 
+                    value="${this.defaultWeight || 400}"
+                >
+                <label><span id="fontWeightValue">${this.defaultWeight || 400}</span></label>
+            </div>
+            <div class="preview" id="glyph-preview"></div>
+            <div class="unicode" id="glyph-unicode"></div>
           </div>
-          <div class="preview" id="glyph-preview"></div>
-          <div class="unicode" id="glyph-unicode"></div>
         </div>
         <div class="glyph-list">
           <div class="content">
