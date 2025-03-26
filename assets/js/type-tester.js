@@ -129,6 +129,7 @@ class FluidenceTypeTester extends HTMLElement {
                         background: var(--col-light-red);
                         border: .1rem solid var(--col-light-red);
                         cursor: pointer;
+                        transition: border .2s ease-in-out;
 
                         &:hover {
                             border: .1rem solid var(--col-red);

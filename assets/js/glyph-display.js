@@ -11,7 +11,17 @@ class GlyphDisplay extends HTMLElement {
 
   connectedCallback() {
     this.render();
+    this.cacheElements();
+    this.setupEventListeners();
   }
+
+  cacheElements() {
+    this.glyphPreview = this.shadowRoot.getElementById('glyphPreview');
+    this.glyphUnicode = this.shadowRoot.getElementById('glyphUnicode');
+    this.fontStyleSelect = this.shadowRoot.getElementById('fontStyleSelect');
+    this.fontWeightSlider = this.shadowRoot.getElementById('fontWeightSlider');
+    this.fontWeightValue = this.shadowRoot.getElementById('fontWeightValue');
+}
 
   attributeChangedCallback(name, oldValue, newValue) {
     if (oldValue !== newValue) {
@@ -58,12 +68,11 @@ class GlyphDisplay extends HTMLElement {
             align-items: center;
             gap: 2rem;
             flex-wrap: wrap;
-            padding: 1rem 0;
+            padding: 3rem 0 2rem;
           }
 
           .control-group {
             font-family: var(--font-body);
-            font-size: 1.6rem;
             display: flex;
             gap: 8px;
             transition: border .2s ease-in-out;
@@ -80,7 +89,7 @@ class GlyphDisplay extends HTMLElement {
 
             select {
               font-family: var(--font-body);
-              font-size: 1.6rem;
+              font-size: 1.8rem;
               border: none;
               background: var(--col-light-red);
               cursor: pointer;
@@ -132,6 +141,7 @@ class GlyphDisplay extends HTMLElement {
 
           .preview {
             font-size: 40rem;
+            flex-grow: 1;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -141,8 +151,7 @@ class GlyphDisplay extends HTMLElement {
 
           .unicode {
             text-align: center;
-            padding-top: 2rem;
-            color: #666;
+            padding: 2rem 0 3rem;
           }
         }
 
@@ -202,8 +211,8 @@ class GlyphDisplay extends HTMLElement {
                 <label><span id="fontWeightValue">${this.defaultWeight || 400}</span></label>
               </div>
             </div>
-            <div class="preview" id="glyph-preview"></div>
-            <div class="unicode" id="glyph-unicode"></div>
+            <div class="preview" id="glyphPreview"></div>
+            <div class="unicode" id="glyphUnicode"></div>
           </div>
         </div>
         <div class="glyph-list">
@@ -220,12 +229,54 @@ class GlyphDisplay extends HTMLElement {
         </div>
       </div>
     `;
+  }
 
-    // Initial selection of first character
-    const firstChar = characters[0];
-    this.selectCharacter(firstChar, 
-      firstChar.charCodeAt(0).toString(16).toUpperCase().padStart(4, '0')
+  setupEventListeners() {
+    // Initial state setup
+    this.glyphPreview.style.fontVariationSettings = `'wght' ${this.defaultWeight || 400}`;
+    this.selectCharacter(this.characters[0], 
+      this.characters[0].charCodeAt(0).toString(16).toUpperCase().padStart(4, '0')
     );
+
+    // Weight slider listener
+    this.fontWeightSlider.addEventListener('input', () => {
+        const weight = this.fontWeightSlider.value;
+        this.glyphPreview.style.fontVariationSettings = `'wght' ${weight}`;
+        this.fontWeightValue.textContent = weight;
+
+        const options = this.fontStyleSelect.options;
+        switch (true) {
+            case weight >= 800:
+                if (!options[2].selected) options[2].selected = true;
+                break;
+            case weight >= 600:
+                if (!options[1].selected) options[1].selected = true;
+                break;
+            default:
+                if (!options[0].selected) options[0].selected = true;
+                break;
+        }
+    });
+
+    // Style select listener
+    this.fontStyleSelect.addEventListener('change', () => {
+        let weight;
+        switch(this.fontStyleSelect.value) {
+            case 'regular':
+                weight = 400;
+                break;
+            case 'bold':
+                weight = 700;
+                break;
+            case 'black':
+                weight = 900;
+                break;
+        }
+        
+        this.fontWeightSlider.value = weight;
+        this.fontWeightValue.textContent = weight;
+        this.glyphPreview.style.fontVariationSettings = `'wght' ${weight}`;
+    });
 
     // Event listeners for character selection
     this.shadowRoot.querySelectorAll('.glyph-list a').forEach(link => {
@@ -249,11 +300,13 @@ class GlyphDisplay extends HTMLElement {
   }
 
   selectCharacter(char, unicode) {
-    const unicodeEl = this.shadowRoot.getElementById('glyph-unicode');
-    const previewEl = this.shadowRoot.getElementById('glyph-preview');
+    this.glyphUnicode.textContent = `U+${unicode}`;
+    this.glyphPreview.textContent = char;
+  };
 
-    unicodeEl.textContent = `U+${unicode}`;
-    previewEl.textContent = char;
+  // Getters for attributes
+  get characters() {
+    return this.getAttribute('characters');
   }
 }
 
