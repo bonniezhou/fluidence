@@ -61,7 +61,7 @@ class FluidenceTypeTester extends HTMLElement {
                     transition: border .2s ease-in-out;
                 }
 
-                .style-select {
+                .control-group.select {
                     padding: .5em;
                     background: var(--col-light-red);
                     border: .1rem solid var(--col-light-red);
@@ -73,6 +73,7 @@ class FluidenceTypeTester extends HTMLElement {
                     select {
                         border: none;
                         background: var(--col-light-red);
+                        cursor: pointer;
                     }
                 }
 
@@ -125,6 +126,7 @@ class FluidenceTypeTester extends HTMLElement {
                         padding: 10px;
                         background: var(--col-light-red);
                         border: .1rem solid var(--col-light-red);
+                        cursor: pointer;
 
                         &:hover {
                             border: .1rem solid var(--col-red);
@@ -140,7 +142,7 @@ class FluidenceTypeTester extends HTMLElement {
 
                 .type-demo {
                     font-family: 'Fluidence';
-                    line-height: normal;
+                    line-height: 1.1;
 
                     &:focus {
                         outline: none;
@@ -150,7 +152,7 @@ class FluidenceTypeTester extends HTMLElement {
 
             <div class="type-tester" aria-label="Type Tester">
                 <div class="controls">
-                    <div class="control-group style-select">
+                    <div class="control-group select">
                         <select id="fontStyleSelect" selected="${this.defaultStyle || "regular"}">
                             <option value="regular" ${this.defaultStyle === 'regular' ? 'selected' : ''}>Fluidence Regular</option>
                             <option value="bold" ${this.defaultStyle === 'bold' ? 'selected' : ''}>Fluidence Bold</option>

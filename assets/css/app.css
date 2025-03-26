@@ -69,7 +69,7 @@ body {
   font-size: 1.8rem;
   font-weight: 400;
   line-height: 1.5;
-  color: rgba(var(--col-black), 1);
+  color: var(--col-black);
   overflow-x: hidden;
   position: relative;
   max-width: 1920px;
@@ -257,8 +257,8 @@ svg {
   text-align: center;
   font-family: "Fluidence", serif;
   font-variation-settings: "wght" 400;
-  font-size: 40px;
-  font-size: 4rem;
+  font-size: 48px;
+  font-size: 4.8rem;
   color: var(--col-black);
 }
 

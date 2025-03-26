@@ -43,7 +43,7 @@ body {
 	@include font-size(1.8);
 	font-weight: 400;
 	line-height: 1.5;
-	color: rgba(var(--col-black), 1);
+	color: var(--col-black);
 	overflow-x: hidden;
 	position: relative;
 	max-width: 1920px;
