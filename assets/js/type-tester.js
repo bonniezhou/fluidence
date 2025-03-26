@@ -64,10 +64,10 @@ class FluidenceTypeTester extends HTMLElement {
                 .style-select {
                     padding: .5em;
                     background: var(--col-light-red);
-                    border: 1px solid var(--col-light-red);
+                    border: .1rem solid var(--col-light-red);
 
                     &:hover {
-                        border: 1px solid var(--col-red);
+                        border: .1rem solid var(--col-red);
                     }
 
                     select {
@@ -75,10 +75,46 @@ class FluidenceTypeTester extends HTMLElement {
                         background: var(--col-light-red);
                     }
                 }
-                
-                .slider {
+
+                .control-group.slider {
                     min-width: 250px;
 		            padding-right: 0;
+                }
+                
+                .range-slider {
+                    -webkit-appearance: none;
+                    appearance: none;
+                    border: none;
+                    background: transparent;
+
+                    &::-webkit-slider-runnable-track {
+                        height: .1rem;
+                        background: var(--col-red);
+                    }
+                    &::-webkit-slider-thumb {
+                        -webkit-appearance: none;
+                        appearance: none;
+                        cursor: pointer;
+                        border-radius: 50%;
+                        margin-top: -0.75rem;
+                        height: 1.5rem;
+                        width: 1.5rem;
+                        background: var(--col-red);
+                    }
+
+                    &::-moz-range-track {
+                        height: .1rem;
+                        background: var(--col-red);
+                    }
+                    &::-moz-range-thumb {
+                        border: none;
+                        cursor: pointer;
+                        border-radius: 50%;
+                        margin-top: -0.75rem;
+                        height: 1.5rem;
+                        width: 1.5rem;
+                        background: var(--col-red);
+                    }
                 }
 
                 .align-buttons {
@@ -88,16 +124,16 @@ class FluidenceTypeTester extends HTMLElement {
                     button {
                         padding: 10px;
                         background: var(--col-light-red);
-                        border: 1px solid var(--col-light-red);
+                        border: .1rem solid var(--col-light-red);
 
                         &:hover {
-                            border: 1px solid var(--col-red);
+                            border: .1rem solid var(--col-red);
                         }
                     }
 
                     .active {
                         background: var(--col-red);
-                        border: 1px solid var(--col-red);
+                        border: .1rem solid var(--col-red);
                         color: white;
                     }
                 }
@@ -124,7 +160,7 @@ class FluidenceTypeTester extends HTMLElement {
 
                     <div class="control-group slider">
                         <label>Weight</label>
-                        <input 
+                        <input class="range-slider"
                             type="range" 
                             id="fontWeightSlider" 
                             min="400" 
@@ -136,7 +172,7 @@ class FluidenceTypeTester extends HTMLElement {
 
                     <div class="control-group slider">
                         <label>Size</label>
-                        <input 
+                        <input class="range-slider"
                             type="range" 
                             id="fontSizeSlider" 
                             min="20" 
