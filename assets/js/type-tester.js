@@ -119,24 +119,24 @@ class FluidenceTypeTester extends HTMLElement {
 
                 .align-buttons {
                     display: flex;
-                    gap: 0;
+                    gap: var(--gap-button);
 
                     button {
                         font-size: 1.6rem;
                         font-family: var(--font-body);
                         padding: 10px;
                         background: var(--col-light-red);
-                        border: .1rem solid var(--col-light-red);
+                        border: none;
                         cursor: pointer;
+                        transition: all 0.25s ease;
 
                         &:hover {
-                            border: .1rem solid var(--col-red);
+                            box-shadow: 0 0 0 .1rem var(--col-red);
                         }
                     }
 
                     .active {
                         background: var(--col-red);
-                        border: .1rem solid var(--col-red);
                         color: white;
                     }
                 }

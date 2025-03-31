@@ -21,7 +21,7 @@ class GlyphDisplay extends HTMLElement {
     this.fontStyleSelect = this.shadowRoot.getElementById('fontStyleSelect');
     this.fontWeightSlider = this.shadowRoot.getElementById('fontWeightSlider');
     this.fontWeightValue = this.shadowRoot.getElementById('fontWeightValue');
-}
+  }
 
   attributeChangedCallback(name, oldValue, newValue) {
     if (oldValue !== newValue) {
@@ -58,7 +58,7 @@ class GlyphDisplay extends HTMLElement {
           flex-direction: column;
           justify-content: center;
           padding: 0 2rem;
-          margin: .2rem 0;
+          margin: var(--gap-button) 0;
 
           background-color: var(--col-light-red);
           font-family: var(--font-body);
@@ -160,8 +160,8 @@ class GlyphDisplay extends HTMLElement {
           .content {
             display: grid;
             grid-template-columns: repeat(10, 1fr);
-            gap: .2rem;
-            padding: .2rem;
+            gap: var(--gap-button);
+            padding: var(--gap-button);
           }
 
           a {
@@ -175,6 +175,7 @@ class GlyphDisplay extends HTMLElement {
             font-size: 4rem;
             background: var(--col-light-red);
             color: var(--col-black);
+            transition: background 0.25s ease, color 0.25s ease;
 
             &:hover {
               box-shadow: 0 0 0 .1rem var(--col-red);

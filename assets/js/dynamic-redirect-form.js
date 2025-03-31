@@ -4,6 +4,12 @@ class DynamicRedirectForm extends HTMLElement {
         this.attachShadow({ mode: 'open' });
         this.selectedStyles = new Set();
         this.selectedLicense = null;
+        this.priceList = {
+            'full-family': 80,
+            'regular': 30,
+            'bold': 30,
+            'black': 30
+        };
         this.redirectMap = {
             'full-family': {
                 'basic': 'https://www.example.com/fullfamily/basic',
@@ -86,7 +92,7 @@ class DynamicRedirectForm extends HTMLElement {
                     display: flex;
                     flex-direction: column;
                     justify-content: left;
-                    gap: .2rem;
+                    gap: var(--gap-button);
 
                     button {
                         padding: 1rem 2rem;
@@ -98,7 +104,7 @@ class DynamicRedirectForm extends HTMLElement {
                         background: var(--col-light-red);
                         color: var(--col-black);
                         cursor: pointer;
-                        transition: all 0.3s ease;
+                        transition: all 0.25s ease;
 
                         .stacked-button-info {
                             text-align: left;
@@ -109,7 +115,7 @@ class DynamicRedirectForm extends HTMLElement {
                             font-size: 1.4rem;
                             margin-top: .5rem;
                             font-weight: 500;
-                            transition: all 0.3s ease;
+                            transition: all 0.25s ease;
                         }
 
                         &:hover {
@@ -140,7 +146,7 @@ class DynamicRedirectForm extends HTMLElement {
                     color: var(--col-white);
                     border: none;
                     cursor: pointer;
-                    transition: background-color 0.3s ease;
+                    transition: all 0.25s ease;
                     font-weight: bold;
 
                     &:hover {
@@ -155,6 +161,14 @@ class DynamicRedirectForm extends HTMLElement {
                             box-shadow: none;
                         }
                     }
+                }
+
+                .subtotal {
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 3rem;
+                    font-weight: bold;
+                    margin-top: 2rem;
                 }
             </style>
             <div class="dynamic-redirect-form">
@@ -205,6 +219,15 @@ class DynamicRedirectForm extends HTMLElement {
                                 <span class="button-subtitle">25 workstations for print/desktop use | 1M monthly page views for web | 2 apps</span>
                             </button>
                         </div>
+                    </div>
+                </div>
+                <div class="subtotal">
+                    <div class="selected-styles">Selected: ${Array.from(this.selectedStyles).join(', ')}</div>
+                    <div>$
+                        ${Array.from(this.selectedStyles)
+                            .map(style => this.priceList[style])
+                            .reduce((acc, num) => acc + num, 0)}
+                        USD
                     </div>
                 </div>
                 <button class="submit-btn" disabled>Buy</button>
@@ -272,6 +295,19 @@ class DynamicRedirectForm extends HTMLElement {
             }
         });
     }
+
+    updateContent() {
+        const selectedStyles = this.shadowRoot.querySelectorAll('.selected-styles');
+        console.log(selectedStyles);
+        selectedStyles.innerHTML = ''; // Clear the list before re-rendering
+    
+        // Add each item from the Set as a list item
+        this.selectedStyles.forEach(style => {
+          const li = document.createElement('li');
+          li.textContent = style;
+          selectedStyles.appendChild(li);
+        });
+      }
 
     checkStyleSelect(button, fullFamilyButton, indivStyleButtons) {
         if (button == fullFamilyButton) {
