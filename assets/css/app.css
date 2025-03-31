@@ -22,6 +22,7 @@ Author URI: https://bonniezhou.com
   --col-white: rgb(255, 255, 255);
   --col-red: rgb(236, 18, 27);
   --col-light-red: rgb(249, 241, 241);
+  --col-grey: rgb(148, 148, 148);
 }
 
 /* Reset
@@ -266,6 +267,17 @@ svg {
   grid-column: 1/4;
   grid-row: 3;
   padding: 0 1rem;
+}
+
+.buy {
+  margin: 2rem 0;
+  grid-column: 1/-1;
+}
+.buy .buy-title {
+  padding: 2rem 0;
+  font-size: 7rem;
+  margin: 0;
+  border-bottom: 0.2rem solid var(--col-red);
 }
 
 @media screen and (min-width: 64em) {

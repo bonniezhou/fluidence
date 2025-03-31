@@ -166,7 +166,6 @@ class GlyphDisplay extends HTMLElement {
 
           a {
             text-decoration: none;
-            color: black;
             text-align: center;
             cursor: pointer;
             aspect-ratio: 1 / 1;
@@ -175,6 +174,7 @@ class GlyphDisplay extends HTMLElement {
             align-items: center;
             font-size: 4rem;
             background: var(--col-light-red);
+            color: var(--col-black);
 
             &:hover {
               box-shadow: 0 0 0 .1rem var(--col-red);

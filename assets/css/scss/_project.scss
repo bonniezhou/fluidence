@@ -37,6 +37,18 @@
 	padding: 0 1rem;
 }
 
+.buy {
+	margin: 2rem 0;
+	grid-column: 1 / -1;
+
+	.buy-title {
+		padding: 2rem 0;
+		font-size: 7rem;
+		margin: 0;
+		border-bottom: .2rem solid var(--col-red);
+	}
+}
+
 @media screen and (min-width: 64em) {
 	.type-about {
 		grid-template-columns: repeat(12, 1fr);
