@@ -4,6 +4,50 @@ class DynamicRedirectForm extends HTMLElement {
         this.attachShadow({ mode: 'open' });
         this.selectedStyles = new Set();
         this.selectedLicense = null;
+        this.redirectMap = {
+            'full-family': {
+                'basic': 'https://www.example.com/fullfamily/basic',
+                'small': 'https://www.example.com/fullfamily/small',
+                'medium': 'https://www.example.com/fullfamily/medium',
+                'large': 'https://www.example.com/fullfamily/large',
+            },
+            'regular': {
+                'basic': 'https://www.example.com/regular/basic',
+                'small': 'https://www.example.com/regular/small',
+                'medium': 'https://www.example.com/regular/medium',
+                'large': 'https://www.example.com/regular/large',
+            },
+            'bold': {
+                'basic': 'https://www.example.com/bold/basic',
+                'small': 'https://www.example.com/bold/small',
+                'medium': 'https://www.example.com/bold/medium',
+                'large': 'https://www.example.com/bold/large',
+            },
+            'black': {
+                'basic': 'https://www.example.com/black/basic',
+                'small': 'https://www.example.com/black/small',
+                'medium': 'https://www.example.com/black/medium',
+                'large': 'https://www.example.com/black/large',
+            },
+            'regular-bold': {
+                'basic': 'https://www.example.com/regularbold/basic',
+                'small': 'https://www.example.com/regularbold/small',
+                'medium': 'https://www.example.com/regularbold/medium',
+                'large': 'https://www.example.com/regularbold/large',
+            },
+            'bold-black': {
+                'basic': 'https://www.example.com/boldblack/basic',
+                'small': 'https://www.example.com/boldblack/small',
+                'medium': 'https://www.example.com/boldblack/medium',
+                'large': 'https://www.example.com/boldblack/large',
+            },
+            'regular-black': {
+                'basic': 'https://www.example.com/regularblack/basic',
+                'small': 'https://www.example.com/regularblack/small',
+                'medium': 'https://www.example.com/regularblack/medium',
+                'large': 'https://www.example.com/regularblack/large',
+            }
+        };
     }
 
     connectedCallback() {
@@ -173,33 +217,6 @@ class DynamicRedirectForm extends HTMLElement {
         const licenseButtons = this.shadowRoot.querySelectorAll('.license-button');
         const submitBtn = this.shadowRoot.querySelector('.submit-btn');
 
-        const redirectMap = {
-            'full-family': {
-                'basic': 'https://www.example.com/fullfamily/basic',
-                'small': 'https://www.example.com/fullfamily/small',
-                'medium': 'https://www.example.com/fullfamily/medium',
-                'large': 'https://www.example.com/fullfamily/large',
-            },
-            'regular': {
-                'basic': 'https://www.example.com/regular/basic',
-                'small': 'https://www.example.com/regular/small',
-                'medium': 'https://www.example.com/regular/medium',
-                'large': 'https://www.example.com/regular/large',
-            },
-            'bold': {
-                'basic': 'https://www.example.com/bold/basic',
-                'small': 'https://www.example.com/bold/small',
-                'medium': 'https://www.example.com/bold/medium',
-                'large': 'https://www.example.com/bold/large',
-            },
-            'black': {
-                'basic': 'https://www.example.com/black/basic',
-                'small': 'https://www.example.com/black/small',
-                'medium': 'https://www.example.com/black/medium',
-                'large': 'https://www.example.com/black/large',
-            }
-        };
-
         // Style button click handler
         const fullFamilyButton = styleButtons[0];
         const indivStyleButtons = Array.from(styleButtons).slice(1);
@@ -243,15 +260,11 @@ class DynamicRedirectForm extends HTMLElement {
             // If no valid redirect found, show alert
             let redirectFound = false;
 
-            // Check redirect for each selected style
-            for (let style of this.selectedStyles) {
-                const redirectUrl = redirectMap[style]?.[this.selectedLicense];
-                
-                if (redirectUrl) {
-                    redirectFound = true;
-                    window.location.href = redirectUrl;
-                    break; // Redirect to first matching URL
-                }
+            const styleKey = Array.from(this.selectedStyles).join('-');
+            const redirectUrl = this.redirectMap[styleKey]?.[this.selectedLicense];
+            if (redirectUrl) {
+                redirectFound = true;
+                window.open(redirectUrl, '_blank', 'noopener,noreferrer');
             }
 
             if (!redirectFound) {
