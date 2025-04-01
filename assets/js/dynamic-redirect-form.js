@@ -3,13 +3,19 @@ class DynamicRedirectForm extends HTMLElement {
         super();
         this.attachShadow({ mode: 'open' });
         this.selectedStyles = new Set();
-        this.selectedLicense = null;
+        this.selectedLicense = 'basic';
         this.priceList = {
             'full-family': 80,
             'regular': 30,
             'bold': 30,
             'black': 30
         };
+        this.priceMultiplier = {
+            'basic': 1,
+            'small': 2,
+            'medium': 6,
+            'large': 10,
+        }
         this.redirectMap = {
             'full-family': {
                 'basic': 'https://www.example.com/fullfamily/basic',
@@ -86,6 +92,10 @@ class DynamicRedirectForm extends HTMLElement {
                         font-size: 1.4rem;
                         text-transform: uppercase;
                     }
+
+                    a {
+                        color: var(--col-red);
+                    }
                 }
 
                 .button-group {
@@ -93,6 +103,7 @@ class DynamicRedirectForm extends HTMLElement {
                     flex-direction: column;
                     justify-content: left;
                     gap: var(--gap-button);
+                    padding-bottom: 2rem;
 
                     button {
                         padding: 1rem 2rem;
@@ -168,7 +179,6 @@ class DynamicRedirectForm extends HTMLElement {
                     justify-content: space-between;
                     font-size: 3rem;
                     font-weight: bold;
-                    margin-top: 2rem;
                 }
             </style>
             <div class="dynamic-redirect-form">
@@ -182,27 +192,27 @@ class DynamicRedirectForm extends HTMLElement {
                                     <div>Fluidence Family</div>
                                     <div class="button-subtitle">3 styles + 1 variable font</div>
                                 </div>
-                                <div class="style-price">$80</div>
+                                <div class="style-price">$${this.calculatePrice('full-family')}</div>
                             </button>
                             <h3 class="subtitle">Individual Styles</h3>
                             <button class="style-button" data-style="regular">
                                 <div>Regular</div>
-                                <div class="style-price">$30</div>
+                                <div class="style-price">$${this.calculatePrice('regular')}</div>
                             </button>
                             <button class="style-button" data-style="bold">
                                 <div>Bold</div>
-                                <div class="style-price">$30</div>
+                                <div class="style-price">$${this.calculatePrice('bold')}</div>
                             </button>
                             <button class="style-button" data-style="black">
                                 <div>Black</div>
-                                <div class="style-price">$30</div>
+                                <div class="style-price">$${this.calculatePrice('black')}</div>
                             </button>
                         </div>
                     </div>
                     <div class="choose-block">
                         <h2 class="choose-title" aria-label="Choose License">Choose License</h2>
                         <div class="button-group">
-                            <button class="license-button" data-license="basic">
+                            <button class="license-button selected" data-license="basic">
                                 <span>Basic License</span>
                                 <span class="button-subtitle">2 workstations for print/desktop use | 20K monthly page views for web</span>
                             </button>
@@ -219,20 +229,58 @@ class DynamicRedirectForm extends HTMLElement {
                                 <span class="button-subtitle">25 workstations for print/desktop use | 1M monthly page views for web | 2 apps</span>
                             </button>
                         </div>
+                        <a href="https://bonniezhou.com/license">Full Licensing Information</a>
                     </div>
                 </div>
                 <div class="subtotal">
-                    <div class="selected-styles">Selected: ${Array.from(this.selectedStyles).join(', ')}</div>
-                    <div>$
-                        ${Array.from(this.selectedStyles)
-                            .map(style => this.priceList[style])
-                            .reduce((acc, num) => acc + num, 0)}
-                        USD
-                    </div>
+                    <div class="selected-styles">Selected: <span id="selected-styles-list"></span></div>
+                    <div>$<span id="total-price">0</span> USD</div>
                 </div>
                 <button class="submit-btn" disabled>Buy</button>
             </div>
         `;
+        
+        this.updateSelectedStyles();
+        this.updateTotalPrice();
+    }
+
+    calculatePrice(style) {
+        const multiplier = this.priceMultiplier[this.selectedLicense] || 1;
+        return this.priceList[style] * multiplier;
+    }
+
+    updateStylePrices() {
+        const styleButtons = this.shadowRoot.querySelectorAll('.style-button');
+        styleButtons.forEach(button => {
+            const style = button.dataset.style;
+            const priceElement = button.querySelector('.style-price');
+            priceElement.textContent = `$${this.calculatePrice(style)}`;
+        });
+    }
+
+    updateSelectedStyles() {
+        const selectedStylesList = this.shadowRoot.querySelector('#selected-styles-list');
+        const stringMap = {
+            'full-family': 'Fluidence Family (3 styles + 1 variable font)',
+            'regular': 'Regular',
+            'bold': 'Bold',
+            'black': 'Black'
+        };
+        if (selectedStylesList) {
+            selectedStylesList.textContent = Array.from(this.selectedStyles)
+                .map(style => stringMap[style] || '')
+                .join(', ') || 'None';
+        }
+    }
+
+    updateTotalPrice() {
+        const totalPriceElement = this.shadowRoot.querySelector('#total-price');
+        if (totalPriceElement) {
+            const total = Array.from(this.selectedStyles)
+                .map(style => this.calculatePrice(style))
+                .reduce((acc, num) => acc + num, 0);
+            totalPriceElement.textContent = total;
+        }
     }
 
     setupEventListeners() {
@@ -256,6 +304,9 @@ class DynamicRedirectForm extends HTMLElement {
                     if (button.classList.contains('selected')) this.selectedStyles.add(button.dataset.style);
                 });
 
+                this.updateSelectedStyles();
+                this.updateTotalPrice();
+
                 // Enable submit button if styles and license are selected
                 submitBtn.disabled = this.selectedStyles.size === 0 || this.selectedLicense === null;
             });
@@ -272,6 +323,10 @@ class DynamicRedirectForm extends HTMLElement {
                 // Add selected class to clicked button
                 button.classList.add('selected');
                 this.selectedLicense = button.dataset.license;
+                
+                // Update all prices based on new license
+                this.updateStylePrices();
+                this.updateTotalPrice();
                 
                 // Enable submit button if styles and license are selected
                 submitBtn.disabled = this.selectedStyles.size === 0 || this.selectedLicense === null;
@@ -295,19 +350,6 @@ class DynamicRedirectForm extends HTMLElement {
             }
         });
     }
-
-    updateContent() {
-        const selectedStyles = this.shadowRoot.querySelectorAll('.selected-styles');
-        console.log(selectedStyles);
-        selectedStyles.innerHTML = ''; // Clear the list before re-rendering
-    
-        // Add each item from the Set as a list item
-        this.selectedStyles.forEach(style => {
-          const li = document.createElement('li');
-          li.textContent = style;
-          selectedStyles.appendChild(li);
-        });
-      }
 
     checkStyleSelect(button, fullFamilyButton, indivStyleButtons) {
         if (button == fullFamilyButton) {
