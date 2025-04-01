@@ -5,16 +5,16 @@ class DynamicRedirectForm extends HTMLElement {
         this.selectedStyles = new Set();
         this.selectedLicense = 'basic';
         this.priceList = {
-            'full-family': 80,
-            'regular': 30,
-            'bold': 30,
-            'black': 30
+            'full-family': 70,
+            'regular': 25,
+            'bold': 25,
+            'black': 25
         };
         this.priceMultiplier = {
             'basic': 1,
             'small': 2,
-            'medium': 6,
-            'large': 10,
+            'medium': 5,
+            'large': 8,
         }
         this.redirectMap = {
             'full-family': {
@@ -91,6 +91,7 @@ class DynamicRedirectForm extends HTMLElement {
                     h3 {
                         font-size: 1.4rem;
                         text-transform: uppercase;
+                        color: var(--col-grey);
                     }
 
                     a {
@@ -117,8 +118,9 @@ class DynamicRedirectForm extends HTMLElement {
                         cursor: pointer;
                         transition: all 0.25s ease;
 
-                        .stacked-button-info {
+                        .button-title {
                             text-align: left;
+                            min-width: 18rem;
                         }
 
                         .button-subtitle {
@@ -127,6 +129,8 @@ class DynamicRedirectForm extends HTMLElement {
                             margin-top: .5rem;
                             font-weight: 500;
                             transition: all 0.25s ease;
+                            flex-grow: 1;
+                            text-align: left;
                         }
 
                         &:hover {
@@ -186,10 +190,10 @@ class DynamicRedirectForm extends HTMLElement {
                     <div class="choose-block">
                         <h2 class="choose-title" aria-label="Choose Styles">Choose Styles</h2>
                         <div class="button-group">
-                            <h3 class="subtitle">Complete Family</h3>
+                            <h3 class="subtitle">Full Typeface Family</h3>
                             <button class="style-button" data-style="full-family">
-                                <div class="stacked-button-info">
-                                    <div>Fluidence Family</div>
+                                <div>
+                                    <div class="button-title">Fluidence Family</div>
                                     <div class="button-subtitle">3 styles + 1 variable font</div>
                                 </div>
                                 <div class="style-price">$${this.calculatePrice('full-family')}</div>
@@ -213,23 +217,24 @@ class DynamicRedirectForm extends HTMLElement {
                         <h2 class="choose-title" aria-label="Choose License">Choose License</h2>
                         <div class="button-group">
                             <button class="license-button selected" data-license="basic">
-                                <span>Basic License</span>
-                                <span class="button-subtitle">2 workstations for print/desktop use | 20K monthly page views for web</span>
+                                <span class="button-title">Basic License</span>
+                                <span class="button-subtitle">for use on up to 2 devices for print/desktop, up to 20K monthly page views for web</span>
                             </button>
                             <button class="license-button" data-license="small">
-                                <span>Small License</span>
-                                <span class="button-subtitle">5 workstations for print/desktop use | 100K monthly page views for web</span>
+                                <span class="button-title">Small License</span>
+                                <span class="button-subtitle">for use on up to 5 devices for print/desktop, up to 100K monthly page views for web</span>
                             </button>
                             <button class="license-button" data-license="medium">
-                                <span>Medium License</span>
-                                <span class="button-subtitle">10 workstations for print/desktop use | 500K monthly page views for web | 1 app</span>
+                                <span class="button-title">Medium License</span>
+                                <span class="button-subtitle">for use on up to 15 devices for print/desktop, up to 500K monthly page views for web, 1 app embed</span>
                             </button>
                             <button class="license-button" data-license="large">
-                                <span>Large License</span>
-                                <span class="button-subtitle">25 workstations for print/desktop use | 1M monthly page views for web | 2 apps</span>
+                                <span class="button-title">Large License</span>
+                                <span class="button-subtitle">for use on up to 30 devices for print/desktop, up to 1M monthly page views for web, up to 2 app embeds</span>
                             </button>
                         </div>
-                        <a href="https://bonniezhou.com/license">Full Licensing Information</a>
+                        You can read the <a href="https://bonniezhou.com/license" target="_blank">Full License</a>  here.
+                        If you need a larger or custom license, please feel free to <a href="mailto:hello@bonniezhou.com" target="_blank">get in touch!</a> 
                     </div>
                 </div>
                 <div class="subtotal">
