@@ -40,6 +40,8 @@
 .buy {
 	margin: 3rem 0;
 	grid-column: 1 / -1;
+	padding: 1rem 0;
+	border-bottom: .2rem solid var(--col-red);
 
 	.buy-title {
 		padding: 2rem 0;
@@ -50,9 +52,15 @@
 	}
 }
 
-.faq-title {
-	font-size: 6rem;
-	font-variation-settings: 'wght' 850;
+.faq {
+	grid-column: 1 / -1;
+
+	.faq-title {
+		padding-top: 2rem;
+		text-align: center;
+		font-size: 6rem;
+		font-variation-settings: 'wght' 850;
+	}
 }
 
 @media screen and (min-width: 64em) {

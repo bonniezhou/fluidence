@@ -103,7 +103,7 @@ h3 {
 }
 
 p {
-  margin-bottom: 0.75em;
+  margin-bottom: 3rem;
 }
 
 /* Links 
@@ -273,6 +273,8 @@ svg {
 .buy {
   margin: 3rem 0;
   grid-column: 1/-1;
+  padding: 1rem 0;
+  border-bottom: 0.2rem solid var(--col-red);
 }
 .buy .buy-title {
   padding: 2rem 0;
@@ -282,7 +284,12 @@ svg {
   font-variation-settings: "wght" 600;
 }
 
-.faq-title {
+.faq {
+  grid-column: 1/-1;
+}
+.faq .faq-title {
+  padding-top: 2rem;
+  text-align: center;
   font-size: 6rem;
   font-variation-settings: "wght" 850;
 }

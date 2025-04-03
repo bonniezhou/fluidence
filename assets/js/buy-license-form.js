@@ -94,12 +94,22 @@ class BuyLicenseForm extends HTMLElement {
                         color: var(--col-grey);
                     }
 
-                    .info {
+                    .info-license{
                         color: var(--col-black);
                     }
 
+                    .info-faq {
+                        font-size: 1.6rem;
+                        margin: .5rem 0;
+                    }
+
                     a {
+                        text-decoration: none;
                         color: var(--col-red);
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
                     }
                 }
 
@@ -108,7 +118,6 @@ class BuyLicenseForm extends HTMLElement {
                     flex-direction: column;
                     justify-content: left;
                     gap: var(--gap-button);
-                    padding-bottom: 2rem;
 
                     button {
                         padding: 1rem 2rem;
@@ -188,6 +197,7 @@ class BuyLicenseForm extends HTMLElement {
                     justify-content: space-between;
                     font-size: 3rem;
                     font-weight: bold;
+                    padding-top: 3rem;
 
                     .original-price {
                         text-decoration: line-through;
@@ -198,7 +208,7 @@ class BuyLicenseForm extends HTMLElement {
             <div class="dynamic-redirect-form">
                 <div class="choose">
                     <div class="choose-block">
-                        <h2 class="choose-title" aria-label="Choose Styles">Choose Styles</h2>
+                        <h2 class="choose-title" aria-label="Choose Styles">Choose Font Styles</h2>
                         <div class="button-group">
                             <h3 class="subtitle">Full Typeface Family</h3>
                             <button class="style-button" data-style="full-family">
@@ -208,6 +218,7 @@ class BuyLicenseForm extends HTMLElement {
                                 </div>
                                 <div class="style-price">$${this.calculatePrice('full-family')}</div>
                             </button>
+                            <p class="info-faq">&#9432; <a href="#" class="faq-variable-font" data-target="#variable-font">What's a variable font?</a></p>
                             <h3 class="subtitle">Individual Styles</h3>
                             <button class="style-button" data-style="regular">
                                 <div>Regular</div>
@@ -224,7 +235,8 @@ class BuyLicenseForm extends HTMLElement {
                         </div>
                     </div>
                     <div class="choose-block">
-                        <h2 class="choose-title" aria-label="Choose License">Choose License</h2>
+                        <h2 class="choose-title" aria-label="Choose License">Choose Font License</h2>
+                        <p class="info-faq">&#9432; <a href="#" class="faq-which-license" data-target="#which-license">Which license do I need?</a></p>
                         <div class="button-group">
                             <button class="license-button selected" data-license="basic">
                                 <span class="button-title">Basic License</span>
@@ -243,10 +255,10 @@ class BuyLicenseForm extends HTMLElement {
                                 <span class="button-subtitle">for use on up to 30 devices for print/desktop, up to 1M monthly page views for web, up to 2 app embeds</span>
                             </button>
                         </div>
-                        <span class="info">
+                        <p class="info-license">
                             You can read the <a href="../../assets/files/BonnieZhou-EULA.pdf" target="_blank">Full License</a>  here.
                             If you need a larger or custom license, please feel free to <a href="mailto:hello@bonniezhou.com" target="_blank">get in touch!</a> 
-                        </span>
+                        </p>
                     </div>
                 </div>
                 <div class="subtotal">
@@ -318,6 +330,8 @@ class BuyLicenseForm extends HTMLElement {
         const styleButtons = this.shadowRoot.querySelectorAll('.style-button');
         const licenseButtons = this.shadowRoot.querySelectorAll('.license-button');
         const submitBtn = this.shadowRoot.querySelector('.submit-btn');
+        const faqWhichLicense = this.shadowRoot.querySelector('.faq-which-license');
+        const faqVariableFont = this.shadowRoot.querySelector('.faq-variable-font');
 
         // Style button click handler
         const fullFamilyButton = styleButtons[0];
@@ -380,6 +394,18 @@ class BuyLicenseForm extends HTMLElement {
                 alert('No redirect found for selected styles and license');
             }
         });
+
+        //FAQ link handlers
+        const faqHandler = (e) => {
+            e.preventDefault();
+            const faqId = e.target.getAttribute('data-target');
+            const faqElement = document.getElementById(faqId);
+            if (faqElement) {
+                faqElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        };
+        faqVariableFont.addEventListener('click', faqHandler);
+        faqWhichLicense.addEventListener('click', faqHandler);
     }
 
     checkStyleSelect(button, fullFamilyButton, indivStyleButtons) {
