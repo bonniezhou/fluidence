@@ -1,4 +1,4 @@
-class DynamicRedirectForm extends HTMLElement {
+class BuyLicenseForm extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
@@ -18,7 +18,7 @@ class DynamicRedirectForm extends HTMLElement {
         }
         this.redirectMap = {
             'full-family': {
-                'basic': 'https://www.example.com/fullfamily/basic',
+                'basic': 'https://buy.stripe.com/3cs8x11BHaKI1KodQR',
                 'small': 'https://www.example.com/fullfamily/small',
                 'medium': 'https://www.example.com/fullfamily/medium',
                 'large': 'https://www.example.com/fullfamily/large',
@@ -94,6 +94,10 @@ class DynamicRedirectForm extends HTMLElement {
                         color: var(--col-grey);
                     }
 
+                    .info {
+                        color: var(--col-black);
+                    }
+
                     a {
                         color: var(--col-red);
                     }
@@ -156,13 +160,14 @@ class DynamicRedirectForm extends HTMLElement {
                 .submit-btn {
                     width: 100%;
                     margin: 2rem 0;
-                    padding: 1rem;
+                    padding: 1.6rem;
                     background-color: var(--col-red);
                     color: var(--col-white);
                     border: none;
                     cursor: pointer;
                     transition: all 0.25s ease;
                     font-weight: bold;
+                    font-size: 2rem;
 
                     &:hover {
                         box-shadow: 0 0 0 .1rem var(--col-red);
@@ -233,8 +238,10 @@ class DynamicRedirectForm extends HTMLElement {
                                 <span class="button-subtitle">for use on up to 30 devices for print/desktop, up to 1M monthly page views for web, up to 2 app embeds</span>
                             </button>
                         </div>
-                        You can read the <a href="https://bonniezhou.com/license" target="_blank">Full License</a>  here.
-                        If you need a larger or custom license, please feel free to <a href="mailto:hello@bonniezhou.com" target="_blank">get in touch!</a> 
+                        <span class="info">
+                            You can read the <a href="../../assets/files/BonnieZhou-EULA.pdf" target="_blank">Full License</a>  here.
+                            If you need a larger or custom license, please feel free to <a href="mailto:hello@bonniezhou.com" target="_blank">get in touch!</a> 
+                        </span>
                     </div>
                 </div>
                 <div class="subtotal">
@@ -380,4 +387,4 @@ class DynamicRedirectForm extends HTMLElement {
 }
 
 // Define the custom element
-customElements.define('dynamic-redirect-form', DynamicRedirectForm);
+customElements.define('buy-license-form', BuyLicenseForm);

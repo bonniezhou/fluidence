@@ -276,9 +276,15 @@ svg {
 }
 .buy .buy-title {
   padding: 2rem 0;
-  font-size: 7rem;
+  font-size: 8rem;
   margin: 0;
   border-bottom: 0.2rem solid var(--col-red);
+  font-variation-settings: "wght" 600;
+}
+
+.faq-title {
+  font-size: 6rem;
+  font-variation-settings: "wght" 850;
 }
 
 @media screen and (min-width: 64em) {
