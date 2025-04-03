@@ -188,6 +188,11 @@ class BuyLicenseForm extends HTMLElement {
                     justify-content: space-between;
                     font-size: 3rem;
                     font-weight: bold;
+
+                    .original-price {
+                        text-decoration: line-through;
+                        color: var(--col-grey);
+                    }
                 }
             </style>
             <div class="dynamic-redirect-form">
@@ -246,7 +251,10 @@ class BuyLicenseForm extends HTMLElement {
                 </div>
                 <div class="subtotal">
                     <div class="selected-styles">Selected: <span id="selected-styles-list"></span></div>
-                    <div>$<span id="total-price">0</span> USD</div>
+                    <div>
+                        <span id="original-price" class="original-price"></span>
+                        <span id="total-price">$0 USD</span> 
+                    </div>
                 </div>
                 <button class="submit-btn" disabled>Buy</button>
             </div>
@@ -286,12 +294,23 @@ class BuyLicenseForm extends HTMLElement {
     }
 
     updateTotalPrice() {
+        const originalPriceElement = this.shadowRoot.querySelector('#original-price');
         const totalPriceElement = this.shadowRoot.querySelector('#total-price');
         if (totalPriceElement) {
             const total = Array.from(this.selectedStyles)
                 .map(style => this.calculatePrice(style))
                 .reduce((acc, num) => acc + num, 0);
-            totalPriceElement.textContent = total;
+
+            if (this.selectedStyles.size === 1 && this.selectedStyles.has('full-family')) {
+                const multiplier = this.priceMultiplier[this.selectedLicense] || 1;
+                const numStyles = 3;
+                const originalPrice = this.priceList['regular'] * numStyles * multiplier;
+                originalPriceElement.textContent = `$${originalPrice}`;
+            } else {
+                originalPriceElement.textContent = '';
+            }
+
+            totalPriceElement.textContent = `$${total} USD`;
         }
     }
 
