@@ -37,6 +37,24 @@
 	padding: 0 1rem;
 }
 
+.buy-button {
+	grid-column: 5 / 6;
+	grid-row: 3;
+	align-self: center;
+	height: fit-content;
+	padding: 1.4rem 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--col-red);
+	color: var(--col-white);
+	text-decoration: none;
+
+	&:hover {
+		box-shadow: 0 0 0 .1rem var(--col-red);
+	}
+}
+
 .buy {
 	margin: 3rem 0;
 	grid-column: 1 / -1;

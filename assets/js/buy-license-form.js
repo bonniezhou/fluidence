@@ -118,6 +118,7 @@ class BuyLicenseForm extends HTMLElement {
                     flex-direction: column;
                     justify-content: left;
                     gap: var(--gap-button);
+                    padding: var(--gap-button) 0;
 
                     button {
                         padding: 1rem 2rem;
@@ -218,7 +219,7 @@ class BuyLicenseForm extends HTMLElement {
                                 </div>
                                 <div class="style-price">$${this.calculatePrice('full-family')}</div>
                             </button>
-                            <p class="info-faq">&#9432; <a href="#" class="faq-variable-font" data-target="#variable-font">What's a variable font?</a></p>
+                            <p class="info-faq">&#9432; <a href="#" class="faq-variable-font" data-target="variable-font">What's a variable font?</a></p>
                             <h3 class="subtitle">Individual Styles</h3>
                             <button class="style-button" data-style="regular">
                                 <div>Regular</div>
@@ -236,7 +237,6 @@ class BuyLicenseForm extends HTMLElement {
                     </div>
                     <div class="choose-block">
                         <h2 class="choose-title" aria-label="Choose License">Choose Font License</h2>
-                        <p class="info-faq">&#9432; <a href="#" class="faq-which-license" data-target="#which-license">Which license do I need?</a></p>
                         <div class="button-group">
                             <button class="license-button selected" data-license="basic">
                                 <span class="button-title">Basic License</span>
@@ -255,6 +255,7 @@ class BuyLicenseForm extends HTMLElement {
                                 <span class="button-subtitle">for use on up to 30 devices for print/desktop, up to 1M monthly page views for web, up to 2 app embeds</span>
                             </button>
                         </div>
+                        <p class="info-faq">&#9432; <a href="#" class="faq-which-license" data-target="which-license">Which license do I need?</a></p>
                         <p class="info-license">
                             You can read the <a href="../../assets/files/BonnieZhou-EULA.pdf" target="_blank">Full License</a>  here.
                             If you need a larger or custom license, please feel free to <a href="mailto:hello@bonniezhou.com" target="_blank">get in touch!</a> 
