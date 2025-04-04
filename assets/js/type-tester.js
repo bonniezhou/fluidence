@@ -10,7 +10,8 @@ class FluidenceTypeTester extends HTMLElement {
             'default-weight', 
             'default-size', 
             'default-align', 
-            'default-style'
+            'default-style',
+            'autofocus'
         ];
     }
 
@@ -18,6 +19,28 @@ class FluidenceTypeTester extends HTMLElement {
         this.render();
         this.cacheElements();
         this.setupEventListeners();
+
+        // Handle autofocus when element is connected to DOM
+        if (this.hasAttribute('autofocus')) {
+            // Use setTimeout to ensure DOM is fully rendered
+            setTimeout(() => {
+                if (this.textPreview) {
+                    this.textPreview.focus();
+                    
+                    // Place cursor at the end of text
+                    const range = document.createRange();
+                    const sel = window.getSelection();
+                    const textNode = this.textPreview.firstChild;
+                    
+                    if (textNode) {
+                        range.setStart(textNode, textNode.length);
+                        range.collapse(true);
+                        sel.removeAllRanges();
+                        sel.addRange(range);
+                    }
+                }
+            }, 0);
+        }
     }
 
     cacheElements() {
@@ -143,7 +166,8 @@ class FluidenceTypeTester extends HTMLElement {
 
                 .type-demo {
                     font-family: 'Fluidence';
-                    line-height: 1.1;
+                    line-height: normal;
+                    caret-color: var(--col-red);
 
                     &:focus {
                         outline: none;
@@ -293,6 +317,10 @@ class FluidenceTypeTester extends HTMLElement {
 
     get defaultStyle() {
         return this.getAttribute('default-style');
+    }
+
+    get hasAutofocus() {
+        return this.hasAttribute('autofocus');
     }
 }
 

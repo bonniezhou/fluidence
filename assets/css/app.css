@@ -277,6 +277,7 @@ svg {
   align-self: center;
   height: fit-content;
   padding: 1.4rem 0;
+  margin-right: 20%;
   display: flex;
   justify-content: center;
   align-items: center;

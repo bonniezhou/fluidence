@@ -42,11 +42,11 @@ class GlyphDisplay extends HTMLElement {
 
         .glyph-grid {
           display: grid;
-          grid-template-columns: repeat(6, 1fr);
+          grid-template-columns: 1fr 1fr;
         }
 
         .inspector-wrapper {
-          grid-column: 1 / 4;
+          grid-column: 1;
         }
 
         .inspector {
@@ -155,7 +155,7 @@ class GlyphDisplay extends HTMLElement {
         }
 
         .glyph-list {
-          grid-column: 4 / -1;
+          grid-column: 2;
 
           .content {
             display: grid;
