@@ -10,6 +10,10 @@
 	padding: 0;
 }
 
+ul {
+	padding: revert;
+}
+
 article, aside, details, figcaption, figure, footer, 
 header, hgroup, menu, nav, section { display: block; }
 

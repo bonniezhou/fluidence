@@ -6,7 +6,7 @@ h1 {
 	@include font-size(4.8);
 	line-height: 1;
 	color: var(--col-red);
-	margin-bottom: 1em;	
+	margin-bottom: 1em;
 }
 
 h2 {
@@ -20,14 +20,21 @@ h3 {
 	font-weight: bold;
 }
 
-p { margin-bottom: 3rem; }
+p {
+	margin-bottom: 3rem;
+}
 
 
 /* Links 
  * ------------------------------------------------------------- */
 
-a { color: var(--col-red); 
+a {
+	color: var(--col-red);
 	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
 }
 
 
@@ -39,15 +46,22 @@ hr {
 	margin: 3em 0;
 }
 
+code {
+	@include font-size(1.6);
+	background-color: var(--col-light-red);
+}
+
 /* Overrides
  * ------------------------------------------------------------- */
 
 .fsjs-skin .dk-selected,
-.fsjs-skin .fsjs-button, 
+.fsjs-skin .fsjs-button,
 .fsjs-skin .fsjs-block-type-buttongroup button,
 .fsjs-label-unit {
 	font-size: 16px !important;
 	font-size: 1.6rem !important;
 }
 
-.fsjs-block-type-textfield .fsjs-element { padding:6rem 0; }
+.fsjs-block-type-textfield .fsjs-element {
+	padding: 6rem 0;
+}

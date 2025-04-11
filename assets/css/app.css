@@ -37,6 +37,10 @@ Author URI: https://bonniezhou.com
   padding: 0;
 }
 
+ul {
+  padding: revert;
+}
+
 article, aside, details, figcaption, figure, footer,
 header, hgroup, menu, nav, section {
   display: block;
@@ -113,12 +117,21 @@ a {
   color: var(--col-red);
   text-decoration: none;
 }
+a:hover {
+  text-decoration: underline;
+}
 
 /* Other
  * ------------------------------------------------------------- */
 hr {
   border: 1px solid rgba(var(--col-black), 1);
   margin: 3em 0;
+}
+
+code {
+  font-size: 16px;
+  font-size: 1.6rem;
+  background-color: var(--col-light-red);
 }
 
 /* Overrides
