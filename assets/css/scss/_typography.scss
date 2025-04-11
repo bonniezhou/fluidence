@@ -31,8 +31,10 @@ p {
 a {
 	color: var(--col-red);
 	text-decoration: none;
+}
 
-	&:hover {
+p, ul {
+	a:hover {
 		text-decoration: underline;
 	}
 }

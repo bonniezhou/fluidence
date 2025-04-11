@@ -117,7 +117,8 @@ a {
   color: var(--col-red);
   text-decoration: none;
 }
-a:hover {
+
+p a:hover, ul a:hover {
   text-decoration: underline;
 }
 
@@ -229,28 +230,29 @@ svg {
  * ----------------------------------------------------------- */
 .layout--footer {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-row-gap: 2rem;
-  padding: 3rem 4rem;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 5rem;
   background-color: var(--col-black);
   color: var(--col-white);
+  column-gap: 5rem;
+}
+.layout--footer h1, .layout--footer p {
+  grid-column: 1/3;
 }
 
-.layout--footer > * {
-  font-size: 16px;
-  font-size: 1.6rem;
+.socials {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+  justify-self: start;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: var(--col-red);
 }
 
-@media screen and (min-width: 64em) {
-  .layout--footer {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .layout--footer p {
-    text-align: center;
-  }
-}
-.project {
-  padding: 0 5rem;
+.main {
+  padding: 0 5rem 2rem;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-auto-rows: minmax(100px, auto);

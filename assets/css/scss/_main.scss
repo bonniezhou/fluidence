@@ -1,8 +1,8 @@
 // Project
 // -----------------------------------------------------------
 
-.project {
-	padding: 0 5rem;
+.main {
+	padding: 0 5rem 2rem;
 	display: grid;
 	grid-template-columns: repeat(6, 1fr);
 	grid-auto-rows: minmax(100px, auto);
