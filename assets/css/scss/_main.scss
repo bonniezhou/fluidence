@@ -8,6 +8,10 @@
 	grid-auto-rows: minmax(100px, auto);
 }
 
+// ------------------------------------------------------
+// Header
+// ------------------------------------------------------
+
 .type-title {
 	grid-column: 1 / -2;
 	grid-row: 1;
@@ -57,6 +61,10 @@
 	}
 }
 
+// ------------------------------------------------------
+// Buy License
+// ------------------------------------------------------
+
 .buy {
 	margin: 3rem 0;
 	grid-column: 1 / -1;
@@ -65,22 +73,36 @@
 
 	.buy-title {
 		padding: 2rem 0;
-		font-size: 8rem;
+		@include font-size(8);
 		margin: 0;
 		border-bottom: .2rem solid var(--col-red);
 		font-variation-settings: 'wght' 600;
 	}
 }
 
-.faq {
+// ------------------------------------------------------
+// FAQ
+// ------------------------------------------------------
+
+  .faq {
 	grid-column: 1 / -1;
 
 	.faq-title {
 		padding-top: 2rem;
 		text-align: center;
-		font-size: 6rem;
+		@include font-size(6);
 		font-variation-settings: 'wght' 850;
 	}
+}
+
+h1.process {
+	grid-column: 1 / -1;
+	@include font-size(5);
+	font-variation-settings: 'wght' 400;
+}
+
+p.process{
+	grid-column: 1 / -3;
 }
 
 @media screen and (min-width: 64em) {

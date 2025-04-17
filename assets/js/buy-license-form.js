@@ -252,7 +252,7 @@ class BuyLicenseForm extends HTMLElement {
                             </button>
                             <button class="license-button" data-license="large">
                                 <span class="button-title">Large License</span>
-                                <span class="button-subtitle">for use on up to 30 devices for print/desktop, up to 1M monthly page views for web, up to 2 app embeds</span>
+                                <span class="button-subtitle">for use on up to 30 devices for print/desktop, up to 1M monthly page views for web, 1 app embed</span>
                             </button>
                         </div>
                         <p class="info-faq">&#9432; <a href="#" class="faq-which-license" data-target="which-license">Which license do I need?</a></p>
