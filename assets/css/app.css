@@ -108,7 +108,7 @@ h3 {
 }
 
 p {
-  margin-bottom: 3rem;
+  margin: 3rem 0;
 }
 
 /* Links 
@@ -330,15 +330,74 @@ svg {
   font-variation-settings: "wght" 850;
 }
 
+h1.inspo,
 h1.process {
   grid-column: 1/-1;
   font-size: 50px;
   font-size: 5rem;
   font-variation-settings: "wght" 400;
+  line-height: revert;
+  margin-bottom: 0;
+}
+
+p.inspo.inspo--1 {
+  grid-column: 1/-2;
+}
+p.inspo.inspo--2 {
+  grid-column: 1/-3;
+}
+p.inspo.inspo--3 {
+  grid-column: 2/-1;
+}
+
+img.inspo.inspo--1 {
+  grid-column: 2/-1;
+}
+img.inspo.inspo--2_1 {
+  grid-column: 3/4;
+  margin-left: -1rem;
+}
+img.inspo.inspo--2_2 {
+  grid-column: 4/5;
+  margin-left: 1rem;
 }
 
 p.process {
+  grid-column: 1/-1;
+}
+p.process.process--2 {
+  grid-column: 1/-2;
+}
+p.process.process--2_1 {
+  grid-column: 3/-2;
+}
+p.process.process--3 {
+  grid-column: 3/5;
+}
+
+img.process.process--1_1 {
   grid-column: 1/-3;
+  grid-row: 15/17;
+  width: 100%;
+}
+img.process.process--1_2 {
+  grid-column: 4/-1;
+  grid-row: 16/18;
+}
+img.process.process--1_3 {
+  grid-column: 2/-3;
+  grid-row: 17/19;
+}
+img.process.process--2 {
+  grid-column: 2/3;
+}
+img.process.process--3 {
+  grid-column: 5/-1;
+}
+
+h1.glyph-display {
+  grid-column: 2/-2;
+  margin-top: 8rem;
 }
 
 @media screen and (min-width: 64em) {
